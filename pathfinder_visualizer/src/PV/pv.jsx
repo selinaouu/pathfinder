@@ -31,12 +31,12 @@ export default class PV extends Component{
 
     }
     render(){
-        const {nodes}=this.state;        
+        const {grid}=this.state;        
         return(
             <>
             <button onClick={()=> this.visualizeDijkstra()}> Visualize Dijkstra's Algo</button>
             <div className='grid'>
-                {nodes.map((row,rowIdx)=>{
+                {grid.map((row,rowIdx)=>{
                     return(
                         <div key={rowIdx}>
                             {row.map((node,nodeIdx)=> {
@@ -84,8 +84,3 @@ const createNode=(col,row)=>{
 
     };
 };
-
-
-            
-                    
-
