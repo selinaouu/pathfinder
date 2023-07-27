@@ -13,7 +13,7 @@ export default class PV extends Component{
     constructor(props){
         super(props);
         this.state={
-            grid:[]
+            grid:[],
         };
     }
     
@@ -22,14 +22,32 @@ export default class PV extends Component{
         this.setState({grid});
     }
 
+    animateDijkstra(visitedNodesInOrder){
+        for(let i=0;i<visitedNodesInOrder.length;i++){
+            setTimeout(()=>{
+                const node=visitedNodesInOrder[i];
+                const newGrid=this.state.grid.slice();
+                const newNode={
+                    ...node,
+                    isVisited:true,
+                };
+                newGrid[node.row][node.col]=newNode;
+                this.setState({grid:newGrid});
+            },10000*i);
+
+        }
+        
+    }
+
     visualizeDijkstra(){
         const{grid}=this.state;
-        const startNode=grid[START_NODE_COL][START_NODE_ROW];
-        const finishNode=grid[FINISH_ROW_COL][FINISH_NODE_ROW];
+        const startNode=grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode=grid[FINISH_NODE_ROW][FINISH_ROW_COL];
         const visitedNodesInOrder=dijkstra(grid,startNode,finishNode);
-        this.animateDijkstra(visitedNodesInOrder)
-
+        this.animateDijkstra(visitedNodesInOrder);
+        //console.log(visitedNodesInOrder);
     }
+
     render(){
         const {grid}=this.state;        
         return(
@@ -40,23 +58,21 @@ export default class PV extends Component{
                     return(
                         <div key={rowIdx}>
                             {row.map((node,nodeIdx)=> {
-                            const{row,col,isStart,isFinish}=node;
-                            return(
-                                <Node 
-                                key={nodeIdx}
-                                isStart={isStart}
-                                isFinish={isFinish}
-                                test={'foo'}
-                                col={col}
-                                row={row}>
-                                </Node>);
+                                const {isFinish,isStart,isVisited}=node;
+                                return(
+                                    <Node 
+                                        key={nodeIdx}
+                                        isFinish={isFinish}
+                                        isStart={isStart}
+                                        isVisited={isVisited}>
+                                    </Node>
+                                );
                         })}
                     </div>
                     );
                 })}
             </div>
             </>
-        
         );
     }
 }
