@@ -1,3 +1,78 @@
 .grid{
-    margin:200px 0 0;
+    margin:45px 0px 0px -360px;
+}
+.dijkstraButton{
+    position:absolute;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 28px;
+    height: 45px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: #a1c6f0;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    top:500px;
+    right:120px;
+    
+}
+.astarButton{
+    position:absolute;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 40px;
+    height: 45px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: #a1c6f0;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    top:500px;
+    right:180px;
+}
+.resetButton{
+    position:absolute;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 40px;
+    height: 45px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: #a1c6f0;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    top:700px;
+    right:200px;
+
+}
+.bfsButton{
+    position:absolute;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 40px;
+    height: 45px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: #a1c6f0;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    top:200px;
+    right:180px;
+}
+.topNav{
+  background-color: #333;
+  overflow: hidden;
+  height:60px
 }

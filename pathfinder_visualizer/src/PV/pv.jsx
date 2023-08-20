@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import Node from './Node/Node';
 import './pv.css';
 import {dijkstra,getNodesInShortestPathOrder} from '../algorithms/dijkstras';
-
-const START_NODE_ROW=10;
-const START_NODE_COL=15;
-const FINISH_NODE_ROW=10;
-const FINISH_ROW_COL=35;
+import {bfs} from '../algorithms/bfs';
+const START_NODE_ROW=13;
+const START_NODE_COL=7;
+const FINISH_NODE_ROW=13;
+const FINISH_ROW_COL=50;
 
 
 export default class PV extends Component{
@@ -63,6 +63,22 @@ export default class PV extends Component{
           }
     }
 
+    animateBFS(visitedNodesInOrder, nodesInShortestPathOrder){
+        for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+            if (i === visitedNodesInOrder.length) {
+              setTimeout(() => {
+                this.animateShortestPath(nodesInShortestPathOrder);
+              }, 10 * i);
+              return;
+            }
+            setTimeout(() => {
+              const node = visitedNodesInOrder[i];
+              document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-visited';
+            }, 10 * i);
+          }
+    }
+
     visualizeDijkstra(){
         const{grid}=this.state;
         const startNode=grid[START_NODE_ROW][START_NODE_COL];
@@ -72,11 +88,26 @@ export default class PV extends Component{
         this.animateDijkstra(visitedNodesInOrder,nodesInShortestPathOrder);
     }
 
+    visualizeDFS(){
+        const{grid}=this.state;
+        const startNode=grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode=grid[FINISH_NODE_ROW][FINISH_ROW_COL];
+        const visitedNodesInOrder = bfs(grid, startNode, finishNode);
+        const nodesInShortestPathOrder=getNodesInShortestPathOrder(finishNode);
+        this.animateBFS(visitedNodesInOrder, nodesInShortestPathOrder, startNode, finishNode);
+    }
+
     render(){
         const {grid,mouseIsPressed}=this.state;        
         return(
             <>
-            <button onClick={()=> this.visualizeDijkstra()}> Visualize Dijkstra's Algo</button>
+            <div class='topNav'></div>
+            <button className='dijkstraButton' onClick={()=> this.visualizeDijkstra()}> Visualize Dijkstra's Algo</button>
+            <button className='astarButton' onClick={()=> this.visualizeDijkstra()}> Visualize AStar Algo</button>
+            <button className='resetButton' onClick={()=> this.visualizeDFS()}> Depth-first Search</button>
+            <button className='bfsButton' onClick={()=> this.visualizeDijkstra()}> Breadth-first Search</button>
+            <button className='resetButton' onClick={()=> this.visualizeDijkstra()}> Reset</button>
+            
             <div className='grid'>
                 {grid.map((row,rowIdx)=>{
                     return(
@@ -109,9 +140,9 @@ export default class PV extends Component{
 }
 const getInitialGrid=()=>{
         const grid=[];
-        for(let row=0;row<20;row++){
+        for(let row=0;row<28;row++){
             const currentRow=[];
-            for(let col=0;col<50;col++){
+            for(let col=0;col<58;col++){
                 currentRow.push(createNode(col,row));
             }
             grid.push(currentRow);
