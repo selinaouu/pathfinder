@@ -3,6 +3,7 @@ import Node from './Node/Node';
 import './pv.css';
 import {dijkstra,getNodesInShortestPathOrder} from '../algorithms/dijkstras';
 import {bfs} from '../algorithms/bfs';
+import {dfs} from '../algorithms/dfs';
 const START_NODE_ROW=13;
 const START_NODE_COL=7;
 const FINISH_NODE_ROW=13;
@@ -37,22 +38,6 @@ export default class PV extends Component{
         this.setState({grid});
     }
 
-    animateDijkstra(visitedNodesInOrder,nodesInShortestPathOrder){
-        for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-            if (i === visitedNodesInOrder.length) {
-              setTimeout(() => {
-                this.animateShortestPath(nodesInShortestPathOrder);
-              }, 10 * i);
-              return;
-            }
-            setTimeout(() => {
-              const node = visitedNodesInOrder[i];
-              document.getElementById(`node-${node.row}-${node.col}`).className =
-                'node node-visited';
-            }, 10 * i);
-          }
-        
-    }
     animateShortestPath(nodesInShortestPathOrder){
         for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
             setTimeout(() => {
@@ -63,7 +48,8 @@ export default class PV extends Component{
           }
     }
 
-    animateBFS(visitedNodesInOrder, nodesInShortestPathOrder){
+
+    animate(visitedNodesInOrder, nodesInShortestPathOrder){
         for (let i = 0; i <= visitedNodesInOrder.length; i++) {
             if (i === visitedNodesInOrder.length) {
               setTimeout(() => {
@@ -85,16 +71,29 @@ export default class PV extends Component{
         const finishNode=grid[FINISH_NODE_ROW][FINISH_ROW_COL];
         const visitedNodesInOrder=dijkstra(grid,startNode,finishNode);
         const nodesInShortestPathOrder=getNodesInShortestPathOrder(finishNode);
-        this.animateDijkstra(visitedNodesInOrder,nodesInShortestPathOrder);
+        this.animate(visitedNodesInOrder,nodesInShortestPathOrder);
+    }
+
+    visualizeBFS(){
+        const{grid}=this.state;
+        const startNode=grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode=grid[FINISH_NODE_ROW][FINISH_ROW_COL];
+        const visitedNodesInOrder = bfs(grid, startNode, finishNode);
+        const nodesInShortestPathOrder=getNodesInShortestPathOrder(finishNode);
+        this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
     visualizeDFS(){
         const{grid}=this.state;
         const startNode=grid[START_NODE_ROW][START_NODE_COL];
         const finishNode=grid[FINISH_NODE_ROW][FINISH_ROW_COL];
-        const visitedNodesInOrder = bfs(grid, startNode, finishNode);
+        const visitedNodesInOrder = dfs(grid, startNode, finishNode);
         const nodesInShortestPathOrder=getNodesInShortestPathOrder(finishNode);
-        this.animateBFS(visitedNodesInOrder, nodesInShortestPathOrder, startNode, finishNode);
+        this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
+
+    reset(){
+        //reset the state???
     }
 
     render(){
@@ -103,10 +102,10 @@ export default class PV extends Component{
             <>
             <div class='topNav'></div>
             <button className='dijkstraButton' onClick={()=> this.visualizeDijkstra()}> Visualize Dijkstra's Algo</button>
-            <button className='astarButton' onClick={()=> this.visualizeDijkstra()}> Visualize AStar Algo</button>
-            <button className='resetButton' onClick={()=> this.visualizeDFS()}> Depth-first Search</button>
-            <button className='bfsButton' onClick={()=> this.visualizeDijkstra()}> Breadth-first Search</button>
-            <button className='resetButton' onClick={()=> this.visualizeDijkstra()}> Reset</button>
+            <button className='astarButton' onClick={()=> this.aStar()}> Visualize AStar Algo</button>
+            <button className='dfsButton' onClick={()=> this.visualizeDFS()}> Depth-first Search</button>
+            <button className='bfsButton' onClick={()=> this.visualizeBFS()}> Breadth-first Search</button>
+            <button className='resetButton' onClick={()=> this.reset()}> Reset</button>
             
             <div className='grid'>
                 {grid.map((row,rowIdx)=>{

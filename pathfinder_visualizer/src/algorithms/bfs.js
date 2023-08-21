@@ -20,34 +20,34 @@ export function bfs(grid, startNode, finishNode){
     
 }
 
-function  updateUnvisitedNeighbours(row, col, stack, grid,currNode) {
+function updateUnvisitedNeighbours(row,col,queue,grid,currNode) {
     let next;
     if (row > 0) {
       next = grid[row - 1][col];
       if (!next.isVisited) {
+        queue.push(next);
         next.previousNode = currNode;
-        stack.push(next);
       }
     }
     if (row < grid.length - 1) {
       next = grid[row + 1][col];
       if (!next.isVisited) {
+        queue.push(next);
         next.previousNode = currNode;
-        stack.push(next);
-      }
-    }
-    if (col < grid[0].length - 1) {
-      next = grid[row][col + 1];
-      if (!next.isVisited) {
-        next.previousNode = currNode;
-        stack.push(next);
       }
     }
     if (col > 0) {
       next = grid[row][col - 1];
       if (!next.isVisited) {
+        queue.push(next);
         next.previousNode = currNode;
-        stack.push(next);
+      }
+    }
+    if (col < grid[0].length - 1) {
+      next = grid[row][col + 1];
+      if (!next.isVisited) {
+        queue.push(next);
+        next.previousNode = currNode;
       }
     }
 }
