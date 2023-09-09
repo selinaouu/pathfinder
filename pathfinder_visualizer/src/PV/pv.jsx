@@ -92,8 +92,17 @@ export default class PV extends Component{
         this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
-    reset(){
-        //reset the state???
+
+    reset(){//resetting the walls
+        for (let row = 0; row < this.state.grid.length; row++) {
+            for (let col = 0; col < this.state.grid[0].length; col++) {
+                if ((document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path") || document.getElementById(`node-${row}-${col}`).className === "node node-visited") {
+                    document.getElementById(`node-${row}-${col}`).className = "node";
+                }
+            }
+        }
+        const newGrid = getInitialGrid();
+        this.setState({ grid: newGrid});
     }
 
     render(){
@@ -169,5 +178,10 @@ const getNewGridWIthWallToggled=(grid,row,col)=>{
     };
     newGrid[row][col]=newNode;
     return newGrid;
+
+};
+
+const getGridWithoutPath=(grid)=>{
+    
 
 };
