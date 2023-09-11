@@ -4,6 +4,7 @@ import './pv.css';
 import {dijkstra,getNodesInShortestPathOrder} from '../algorithms/dijkstras';
 import {bfs} from '../algorithms/bfs';
 import {dfs} from '../algorithms/dfs';
+import { astar } from '../algorithms/astar';
 const START_NODE_ROW=13;
 const START_NODE_COL=7;
 const FINISH_NODE_ROW=13;
@@ -91,7 +92,15 @@ export default class PV extends Component{
         const nodesInShortestPathOrder=getNodesInShortestPathOrder(finishNode);
         this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
     }
-
+    
+    visualizeAStar(){
+        const{grid}=this.state;
+        const startNode=grid[START_NODE_ROW][START_NODE_COL];
+        const finishNode=grid[FINISH_NODE_ROW][FINISH_ROW_COL];
+        const visitedNodesInOrder = astar(grid, startNode, finishNode);
+        const nodesInShortestPathOrder=getNodesInShortestPathOrder(finishNode);
+        this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
+    }
 
     reset(){//resetting the walls
         for (let row = 0; row < this.state.grid.length; row++) {
@@ -109,12 +118,15 @@ export default class PV extends Component{
         const {grid,mouseIsPressed}=this.state;        
         return(
             <>
-            <div class='topNav'></div>
+            <div class='topNav'>
+                
+            </div>
+            <div class="border"></div>
             <button className='dijkstraButton' onClick={()=> this.visualizeDijkstra()}> Visualize Dijkstra's Algo</button>
-            <button className='astarButton' onClick={()=> this.aStar()}> Visualize AStar Algo</button>
+            <button className='astarButton' onClick={()=> this.visualizeAStar()}> Visualize AStar Algo</button>
             <button className='dfsButton' onClick={()=> this.visualizeDFS()}> Depth-first Search</button>
             <button className='bfsButton' onClick={()=> this.visualizeBFS()}> Breadth-first Search</button>
-            <button className='resetButton' onClick={()=> this.reset()}> Reset</button>
+            <button className='resetButton' onClick={()=> this.reset()}> Reset Grid/Walls</button>
             
             <div className='grid'>
                 {grid.map((row,rowIdx)=>{
@@ -167,6 +179,7 @@ const createNode=(col,row)=>{
         isVisited:false,
         isWall:false,
         previousNode:null,
+        distanceToFinishNode: Math.abs(FINISH_NODE_ROW - row) + Math.abs(FINISH_ROW_COL - col),
     };
 };
 const getNewGridWIthWallToggled=(grid,row,col)=>{
@@ -181,7 +194,4 @@ const getNewGridWIthWallToggled=(grid,row,col)=>{
 
 };
 
-const getGridWithoutPath=(grid)=>{
-    
 
-};

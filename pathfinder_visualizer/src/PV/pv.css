@@ -8,51 +8,20 @@
     cursor: pointer;
     border: none;
     padding: 0 28px;
-    height: 45px;
+    height: 50px;
     line-height: 35px;
     border-radius: 5px;
-    background-color: #a1c6f0;
+    background-color: rgb(55, 35, 241);
     color: white;
     font-weight: bold;
-    font-size: 13px;
-    top:500px;
-    right:120px;
-    
-}
-.astarButton{
-    position:absolute;
-    display: inline-block;
-    outline: 0;
-    cursor: pointer;
-    border: none;
-    padding: 0 40px;
-    height: 45px;
-    line-height: 35px;
-    border-radius: 5px;
-    background-color: #a1c6f0;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    top:500px;
-    right:180px;
-}
-.resetButton{
-    position:absolute;
-    display: inline-block;
-    outline: 0;
-    cursor: pointer;
-    border: none;
-    padding: 0 40px;
-    height: 45px;
-    line-height: 35px;
-    border-radius: 5px;
-    background-color: #a1c6f0;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
+    font-size: 15px;
     top:700px;
-    right:200px;
-
+    right:120px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.dijkstraButton:hover{
+    opacity: 1;
 }
 .bfsButton{
     position:absolute;
@@ -61,15 +30,20 @@
     cursor: pointer;
     border: none;
     padding: 0 40px;
-    height: 45px;
+    height: 50px;
     line-height: 35px;
     border-radius: 5px;
-    background-color: #a1c6f0;
+    background-color: rgb(55, 35, 241);
     color: white;
     font-weight: bold;
-    font-size: 13px;
-    top:200px;
-    right:180px;
+    font-size: 15px;
+    top:400px;
+    right:120px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.bfsButton:hover{
+    opacity: 1;
 }
 .dfsButton{
     position:absolute;
@@ -78,18 +52,81 @@
     cursor: pointer;
     border: none;
     padding: 0 40px;
-    height: 45px;
+    height: 50px;
     line-height: 35px;
     border-radius: 5px;
-    background-color: #a1c6f0;
+    background-color: rgb(55, 35, 241);
     color: white;
     font-weight: bold;
-    font-size: 13px;
-    top:300px;
-    right:180px;
+    font-size: 15px;
+    top:500px;
+    right:125px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.dfsButton:hover{
+    opacity: 1;
 }
 .topNav{
   background-color: #333;
   overflow: hidden;
   height:60px
 }
+.astarButton{
+    position:absolute;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 40px;
+    height: 50px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: rgb(55, 35, 241);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    top:600px;
+    right:120px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.astarButton:hover{
+    opacity: 1;
+}
+.resetButton{
+    position:absolute;
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0 40px;
+    height: 50px;
+    line-height: 35px;
+    border-radius: 5px;
+    background-color: rgba(211, 28, 28, 0.993);
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    top:270px;
+    right:130px;
+    transition: .2s ease-in-out 0s;
+}
+.resetButton:hover{
+    transform: scale(1.15);
+}
+.border{
+    position:absolute;
+    top:350px;
+    right:75px;
+    height: 450px;
+    width: 300px;
+    background-color: #8accd1;
+    border-radius: 5px;
+    border-color: black;
+    transition: background-color 0.5s ease-out 800ms;
+}
+.border:hover{
+    background-color: #a4f1f7;
+}
+/*adding a section to navbad: info which will display a popup that is exitable*/
