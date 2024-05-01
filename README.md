@@ -1,6 +1,20 @@
 # Pathfinding Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## About
+With this pathfinding visualizer, one can visualize the different paths that different search algorithms take! 
+
+## Key Features:
+- Depth-first search
+- Breadth-first search
+- Dijkstra’s
+- A*(A-Star)
+
+## Tech Stack
+- React
+- Javascript
+- CSS
+- Node.js
+- HTML
 
 ## Available Scripts
 
