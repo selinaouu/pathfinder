@@ -5,6 +5,7 @@ import {dijkstra,getNodesInShortestPathOrder} from '../algorithms/dijkstras';
 import {bfs} from '../algorithms/bfs';
 import {dfs} from '../algorithms/dfs';
 import { astar } from '../algorithms/astar';
+
 const START_NODE_ROW=13;
 const START_NODE_COL=7;
 const FINISH_NODE_ROW=13;
@@ -19,6 +20,7 @@ export default class PV extends Component{
             mouseIsPressed:false,
         };
     }
+    
     handleMouseDown(row,col){
         const newGrid=getNewGridWIthWallToggled(this.state.grid,row,col);
         this.setState({grid:newGrid,mouseIsPressed:true});
@@ -115,12 +117,11 @@ export default class PV extends Component{
     }
 
     render(){
-        const {grid,mouseIsPressed}=this.state;        
+        const {grid,mouseIsPressed}=this.state;     
+
         return(
             <>
-            <div class='topNav'>
-                
-            </div>
+            <div class='topNav'></div>
             <div class="border"></div>
             <button className='dijkstraButton' onClick={()=> this.visualizeDijkstra()}> Visualize Dijkstra's Algo</button>
             <button className='astarButton' onClick={()=> this.visualizeAStar()}> Visualize AStar Algo</button>
@@ -191,7 +192,6 @@ const getNewGridWIthWallToggled=(grid,row,col)=>{
     };
     newGrid[row][col]=newNode;
     return newGrid;
-
 };
 
 
